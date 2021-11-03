@@ -5,7 +5,7 @@ The files in this repository were used to configure the network depicted below.
 
 !Info_Sec-Cloud-Elk_Azure/Elk_Stack.drawio.png
 
-These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the Ansible file may be used to install only certain pieces of it, such as Filebeat.
 
   - filebeat-playbook.yml
   - install-elk.yml
@@ -108,16 +108,16 @@ $ sudo docker container start <name_of_Ansible_Provisioner_container>
 $ sudo docker container attach <name_of_Ansible_Provisioner_container>
 
 Inside your provisioners docker container you want to get your file copied to to your device, you will use Curl:
-# cd /etc/ansible
-# mkdir files
-# cd files
-# Curl https://gist.githubusercontent.com/slape/5cc350109583af6cbe577bbcc0710c93/raw/eca603b72586fbe148c11f9c87bf96a63cb25760/Filebeat > filebeat-config.yml
+> # cd /etc/ansible
+> # mkdir files
+> # cd files
+> # Curl https://gist.githubusercontent.com/slape/5cc350109583af6cbe577bbcc0710c93/raw/eca603b72586fbe148c11f9c87bf96a63cb25760/Filebeat > filebeat-config.yml
 
 Now that the file is copied over to your ansible container and you get your config file edited and the proper IPs filled, you will need to run the ansible playbook:
-# ansible-playbook filebeat-config.yml
+> # ansible-playbook filebeat-config.yml
 
 When this playbook runs and you need to check whether your VM was properly imaged, you will SSH into it using the Private IP that is in the VNET.
-# ssh <username>@<ELK_stack_private_IP>
+> # ssh <username>@<ELK_stack_private_IP>
 
 This will allow you to make sure you have proper connectivity to the Virtual Machine still, and you can try to ping public domains to verify it is not publicly available. 
 (because you want to make it so that only your public IP is white-listed on your Azure Security group.)
@@ -131,4 +131,4 @@ Common errors during Imaging:
 - If the Azure Security group is not configured correctly, your Ansible docker container on the Provisioner_VM and the ELK_VM are unable to communicate.
 - The hosts file MUST be updated with the proper IP addresses and [Server_Names] that are being used in the ansible playbook so that your playbooks dont throw errors during the commands.
 - You need to make certain your VMs are running and that the IPs did not change in case they are still dynamic and the VMs got restarted.
-- Ensure you update your SSH, id_rsa.pub was updated properly in your VMs Azure password settings and that you are using the right Username before the @<public_IP>
+- Ensure you update your SSH, id_rsa.pub was updated properly in your VMs Azure password settings and that you are using the right Username before the public ip.
