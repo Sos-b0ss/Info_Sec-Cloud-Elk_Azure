@@ -3,7 +3,7 @@
 
 The files in this repository were used to configure the network depicted below.
 
-!Info_Sec-Cloud-Elk_Azure/Elk_Stack.drawio.png
+[Link to ELK stack architecture sketch](https://github.com/Sos-b0ss/Info_Sec-Cloud-Elk_Azure/blob/main/Elk_Stack.drawio.png)
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the Ansible file may be used to install only certain pieces of it, such as Filebeat.
 
@@ -77,7 +77,7 @@ The playbook implements the following tasks:
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-!Info_Sec-Cloud-Elk_Azure/Docker_Commands.png
+[Link to docker ps screenshot](https://github.com/Sos-b0ss/Info_Sec-Cloud-Elk_Azure/blob/main/Docker_Commands.png)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
@@ -104,13 +104,18 @@ SSH into the control node and follow the steps below:
 Once you get connected to your Ansible provisioner virtual machine using SSH to get your container started and attached use:
 
 >\$ sudo docker container list -a
+>
 >\$ sudo docker container start <name_of_Ansible_Provisioner_container>
+>
 >\$ sudo docker container attach <name_of_Ansible_Provisioner_container>
 
 Inside your provisioners docker container you want to get your file copied to to your device, you will use Curl:
->\# cd /etc/ansible
+>\# cd /etc$ sudo dock/ansible
+>
 >\# mkdir files
+>
 >\# cd files
+>
 >\# Curl https://gist.githubusercontent.com/slape/5cc350109583af6cbe577bbcc0710c93/raw/eca603b72586fbe148c11f9c87bf96a63cb25760/Filebeat > filebeat-config.yml
 
 Now that the file is copied over to your ansible container and you get your config file edited and the proper IPs filled, you will need to run the ansible playbook:
